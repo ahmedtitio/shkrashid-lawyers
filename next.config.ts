@@ -71,7 +71,7 @@ const nextConfig: NextConfig = {
   },
 
   // Enable SWC minification
-  swcMinify: true,
+  // swcMinify: true,
 
   // Optimize build output
   distDir: '.next',
@@ -80,7 +80,7 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
 
   // Optimize CSS
-  optimizeFonts: true,
+  // optimizeFonts: true,
 };
 
 export default nextConfig;

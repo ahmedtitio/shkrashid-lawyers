@@ -16,10 +16,16 @@ interface WebVitalMetric {
   id: string;
 }
 
+// Layout Shift Entry interface
+interface LayoutShiftEntry extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
 // Extend window interface for gtag
 declare global {
   interface Window {
-    gtag?: (command: string, targetId: string, config?: any) => void;
+    gtag?: (command: string, targetId: string, config: Record<string, unknown>) => void;
   }
 }
 
@@ -70,9 +76,12 @@ export function PerformanceMonitor() {
       let clsValue = 0;
       const entries = list.getEntries();
 
-      entries.forEach((entry: any) => {
-        if (!entry.hadRecentInput) {
-          clsValue += entry.value;
+      entries.forEach((entry: PerformanceEntry) => {
+        if ('hadRecentInput' in entry && 'value' in entry) {
+          const layoutShiftEntry = entry as LayoutShiftEntry;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
+          }
         }
       });
 
@@ -81,7 +90,7 @@ export function PerformanceMonitor() {
 
     try {
       clsObserver.observe({ entryTypes: ['layout-shift'] });
-    } catch (e) {
+    } catch {
       console.warn('CLS observer not supported');
     }
 

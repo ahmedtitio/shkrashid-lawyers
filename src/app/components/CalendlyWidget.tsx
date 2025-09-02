@@ -43,7 +43,7 @@ export function CalendlyWidget() {
               (header as HTMLElement).style.display = 'none';
             }
           }
-        } catch (e) {
+        } catch {
           // Cross-origin restrictions may prevent direct access
           console.log('Cannot access iframe content due to cross-origin policy');
         }

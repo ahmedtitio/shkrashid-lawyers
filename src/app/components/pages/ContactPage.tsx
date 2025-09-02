@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { useLanguage } from '../LanguageProvider';
 import { useSettings } from '../SettingsProvider';
 import { Card, CardContent } from '../ui/card';
@@ -178,10 +179,12 @@ export function ContactPage({ onConsultationClick }: ContactPageProps) {
 
                   {/* Company Logo */}
                   <div className="flex justify-center">
-                    <img
+                    <Image
                       src="/9666898968.jpg"
                       alt="Sheikh Rashid Al Nuaimi Law Firm Logo"
-                      className="w-50 h-50 object-contain"
+                      width={200}
+                      height={200}
+                      className="object-contain"
                     />
                   </div>
 
