@@ -3,17 +3,17 @@
     "version": 2,
     "functions": {
         "api/**/*.js": {
-            "runtime": "nodejs20.x",
+            "runtime": "@vercel/node@20",
             "memory": 1024,
             "maxDuration": 10
         },
         "api/**/*.ts": {
-            "runtime": "nodejs20.x",
+            "runtime": "@vercel/node@20",
             "memory": 1024,
             "maxDuration": 10
         },
         "app/api/**/*": {
-            "runtime": "nodejs20.x",
+            "runtime": "@vercel/node@20",
             "memory": 1024,
             "maxDuration": 10
         }
