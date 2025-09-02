@@ -159,8 +159,14 @@ class SettingsStorage {
   }
 
   // تحديث قسم معين من الإعدادات
-  async updateSection(section: keyof SettingsData, data: any): Promise<SettingsData> {
-    (this.defaultSettings as any)[section] = { ...(this.defaultSettings as any)[section], ...data };
+  async updateSection(section: keyof SettingsData, data: Record<string, unknown>): Promise<SettingsData> {
+    const currentSection = this.defaultSettings[section];
+    if (typeof currentSection === 'object' && currentSection !== null) {
+      (this.defaultSettings as unknown as Record<keyof SettingsData, Record<string, unknown>>)[section] = {
+        ...currentSection,
+        ...data
+      };
+    }
     await this.saveSettings();
     return { ...this.defaultSettings };
   }
