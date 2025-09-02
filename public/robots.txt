@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block access to admin areas
+Disallow: /admin/
+Disallow: /api/admin/
+
+# Block access to sensitive files
+Disallow: /api/settings
+Disallow: /data/
+
+# Allow access to CSS, JS, and images
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.ico
+
+# Sitemap
+Sitemap: https://shkrashid-lawyers.com/sitemap.xml

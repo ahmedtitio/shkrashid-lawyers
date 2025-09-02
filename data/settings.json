@@ -1,0 +1,62 @@
+{
+  "contact": {
+    "phone": "044475234",
+    "mobile": "+971 58 388 3441",
+    "email": "rashidalnuimiest@gmail.com",
+    "address": "UAE/Dubai/Sheikh Rashid Bin Nasser Al Nuaimi Law Firm - Oud Metha - Malaysia Trade Centre - 3rd Floor - Office 303",
+    "mapUrl": "https://maps.google.com/?q=Malaysia+Trade+Centre+Dubai"
+  },
+  "officeHours": [
+    {
+      "day": "mondayThursday",
+      "hours": "09:00 am – 04:00 pm"
+    },
+    {
+      "day": "friday",
+      "hours": "09:00 am – 12:00 pm"
+    },
+    {
+      "day": "weekend",
+      "hours": "closed"
+    }
+  ],
+  "socialMedia": {
+    "instagram": "https://www.instagram.com/shkrashed/?igsh=MWFyam1ieWNnMmg5#",
+    "whatsapp": "https://wa.me/971583883441",
+    "linkedin": "https://linkedin.com",
+    "facebook": "https://facebook.com"
+  },
+  "whatsappFloat": {
+    "url": "https://wa.me/971583883441?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20legal%20services.",
+    "enabled": true
+  },
+  "navigation": {
+    "home": "",
+    "about": "/about",
+    "contact": "/contact",
+    "terms": "/terms",
+    "privacy": "/privacy"
+  },
+  "buttons": {
+    "consultation": {
+      "text_en": "Free Legal Consultation",
+      "text_ar": "استشارة قانونية مجانية",
+      "url": "#consultation"
+    },
+    "services": {
+      "text_en": "View Our Services",
+      "text_ar": "عرض خدماتنا",
+      "url": "#services"
+    },
+    "contact": {
+      "text_en": "Get in Touch",
+      "text_ar": "تواصل معنا",
+      "url": "/contact"
+    }
+  },
+  "seo": {
+    "title": "Sheikh Rashid Bin Nasser Al Nuaimi Law Firm",
+    "description": "Expert Legal Services in the UAE",
+    "keywords": "law firm, legal services, UAE, Dubai, lawyer"
+  }
+}
