@@ -1,54 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// بيانات تجريبية للرسائل (في التطبيق الحقيقي ستكون قاعدة بيانات)
-const messages = [
-  {
-    id: '1',
-    firstName: 'أحمد',
-    lastName: 'محمد',
-    email: 'ahmed@example.com',
-    phone: '+971501234567',
-    topic: 'Civil Law',
-    message: 'أحتاج استشارة قانونية بخصوص قضية مدنية',
-    timestamp: new Date('2024-01-15T10:30:00'),
-    read: false
-  },
-  {
-    id: '2',
-    firstName: 'فاطمة',
-    lastName: 'علي',
-    email: 'fatima@example.com',
-    phone: '+971507654321',
-    topic: 'Family Law',
-    message: 'استفسار حول إجراءات الطلاق',
-    timestamp: new Date('2024-01-14T14:20:00'),
-    read: true
-  },
-  {
-    id: '3',
-    firstName: 'محمد',
-    lastName: 'خالد',
-    email: 'mohammed@example.com',
-    phone: '+971509876543',
-    topic: 'Commercial Law',
-    message: 'نحتاج استشارة لتأسيس شركة جديدة',
-    timestamp: new Date('2024-01-13T09:15:00'),
-    read: false
-  }
-];
+import dataStorage from '../../../lib/dataStorage';
 
 // GET - جلب جميع الرسائل والإحصائيات
 export async function GET() {
   try {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-    const stats = {
-      total: messages.length,
-      read: messages.filter(m => m.read).length,
-      unread: messages.filter(m => !m.read).length,
-      today: messages.filter(m => new Date(m.timestamp) >= today).length
-    };
+    const messages = await dataStorage.getAllMessages();
+    const stats = await dataStorage.getStats();
 
     return NextResponse.json({
       success: true,
@@ -81,20 +38,16 @@ export async function POST(request: NextRequest) {
     }
 
     // إنشاء رسالة جديدة
-    const newMessage = {
-      id: Date.now().toString(),
+    const messageData = {
       firstName: body.firstName,
       lastName: body.lastName,
       email: body.email,
       phone: body.phone,
       topic: body.topic,
-      message: body.message,
-      timestamp: new Date(),
-      read: false
+      message: body.message
     };
 
-    // إضافة الرسالة إلى القائمة
-    messages.unshift(newMessage); // إضافة في البداية لتظهر أولاً
+    const newMessage = await dataStorage.addMessage(messageData);
 
     return NextResponse.json({
       success: true,
@@ -123,16 +76,14 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const messageIndex = messages.findIndex(m => m.id === id);
-    if (messageIndex === -1) {
+    const success = await dataStorage.updateMessage(id, { read: true });
+
+    if (!success) {
       return NextResponse.json(
         { success: false, error: 'Message not found' },
         { status: 404 }
       );
     }
-
-    // تحديث حالة الرسالة كمقروءة
-    messages[messageIndex].read = true;
 
     return NextResponse.json({
       success: true,
@@ -160,16 +111,14 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const messageIndex = messages.findIndex(m => m.id === id);
-    if (messageIndex === -1) {
+    const success = await dataStorage.deleteMessage(id);
+
+    if (!success) {
       return NextResponse.json(
         { success: false, error: 'Message not found' },
         { status: 404 }
       );
     }
-
-    // حذف الرسالة
-    messages.splice(messageIndex, 1);
 
     return NextResponse.json({
       success: true,

@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data files (contains user messages - should not be committed)
+data/
+*.db
+*.sqlite
+*.sqlite3
